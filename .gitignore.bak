@@ -1,0 +1,23 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/homefrontend/node_modules
+/homefrontend/.pnp
+/homefrontend.pnp.js
+
+# testing
+/homefrontend/coverage
+
+# production
+/homefrontend/build
+
+# misc
+/homefrontend.DS_Store
+/homefrontend.env.local
+/homefrontend.env.development.local
+/homefrontend.env.test.local
+/homefrontend.env.production.local
+
+/homefrontendnpm-debug.log*
+/homefrontendyarn-debug.log*
+/homefrontendyarn-error.log*
