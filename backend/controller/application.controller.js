@@ -1,8 +1,15 @@
 import express from "express";
-import mysql2 from "mysql2";
+import nodemailer from "nodemailer";
 import dbcon from "../dbconnect/dbconnection";
 const applicationController = express.Router();
 let con;
+let transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "arawnapubg01@gmail.com",
+    pass: "alialiFb777",
+  },
+});
 
 applicationController.get("/api/application/getAll", (req, res) => {
   con = dbcon();
@@ -46,6 +53,19 @@ applicationController.post("/api/application/add", (req, res) => {
       data: null,
     });
   } else {
+    let mailOptions = {
+      from: "arawnapubg01@gmail.com",
+      to: "alihocaoglu1220@gmail.com",
+      subject: "Qrgarsonum Başvuru",
+      text: `Sirket adı: ${req.body.companyName} -- Ad: ${req.body.name} -- Telefon: ${req.body.phone} -- Email: ${req.body.email} -- Not: ${req.body.note}`,
+    };
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+    });
     con = dbcon();
     con.connect(function (err) {
       if (err) throw err;
