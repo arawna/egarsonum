@@ -23,3 +23,25 @@
 /homenpm-debug.log*
 /homeyarn-debug.log*
 /homeyarn-error.log*
+
+# dependencies
+/siparis/node_modules
+/siparis/.pnp
+/siparis.pnp.js
+
+# testing
+/siparis/coverage
+
+# production
+/siparis/build
+
+# misc
+/siparis.DS_Store
+/siparis.env.local
+/siparis.env.development.local
+/siparis.env.test.local
+/siparis.env.production.local
+
+/siparisnpm-debug.log*
+/siparisyarn-debug.log*
+/siparisyarn-error.log*
