@@ -11,8 +11,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(fileUpload());
 // use all controllers(APIs) here
-app.use("/", (applicationController, imagesController));
+app.use("/", imagesController);
+app.use("/", applicationController);
 // Start Server here
-app.listen(8080, () => {
-  console.log("Server is running on port 8080!");
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}!`);
 });

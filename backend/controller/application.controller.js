@@ -1,6 +1,7 @@
 import express from "express";
 import nodemailer from "nodemailer";
 import dbcon from "../dbconnect/dbconnection";
+let requestIp = require("request-ip");
 const applicationController = express.Router();
 let con;
 let transporter = nodemailer.createTransport({
@@ -103,5 +104,9 @@ applicationController.post("/api/application/add", (req, res) => {
       con.end();
     });
   }
+});
+applicationController.get("/deneme", (req, res) => {
+  let clientIp = requestIp.getClientIp(req);
+  res.send(clientIp);
 });
 export default applicationController;
