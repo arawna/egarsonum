@@ -1,12 +1,12 @@
-import express from "express";
+const express = require("express");
 const imagesController = express.Router();
 const knex = require("knex")({
   client: "mysql2",
   connection: {
     host: "127.0.0.1",
-    user: "root",
-    password: "1220fb1220",
-    database: "egarsonum",
+    user: "qrgarson_ali",
+    password: "alialiFb777.",
+    database: "qrgarson_qrgarsonum",
   },
 });
 // knex.migrate.latest();
@@ -32,4 +32,5 @@ imagesController.get("/api/img/:id", async (req, res) => {
     res.end("No Img with that Id!");
   }
 });
-export default imagesController;
+// export default imagesController;
+module.exports = imagesController;

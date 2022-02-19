@@ -1,0 +1,74 @@
+const express = require("express");
+const requestIp = require("request-ip");
+const CryptoJS = require("crypto-js");
+const AES = require("crypto-js/aes");
+const dbcon = require("../dbconnect/dbconnection");
+const knex = require("knex")({
+  client: "mysql2",
+  connection: {
+    host: "127.0.0.1",
+    user: "root",
+    password: "1220fb1220",
+    database: "egarsonum",
+  },
+});
+const getCustomerInfoByIp = require("../core/customer");
+const customerInformationsController = express.Router();
+
+customerInformationsController.get("/api/cafe/:cafetext", async (req, res) => {
+  let cafeAndTable = CryptoJS.AES.decrypt(
+    req.params["cafetext"],
+    "ali"
+  ).toString(CryptoJS.enc.Utf8);
+  if (!cafeAndTable) {
+    //sifreli metin geçersizse yönlendirme
+    res.redirect("https://google.com");
+  } else {
+    //sifreli medin geçerli ise
+    //db kayıt ve yönlendirme yapılacak
+    let clientIp = requestIp.getClientIp(req);
+    // console.log(new Date().toISOString().slice(0, 19).replace("T", " "));
+    await knex
+      .insert({
+        ip: clientIp,
+        cafe_id: cafeAndTable.split("----")[0],
+        table_id: cafeAndTable.split("----")[1],
+        create_date: new Date().toISOString().slice(0, 19).replace("T", " "),
+      })
+      .into("customer_informations");
+    res.redirect("http://localhost:5000");
+  }
+});
+
+customerInformationsController.post(
+  "/api/cafe/getCustomerInfoByIp",
+  async (req, res) => {
+    if (req.body.ip) {
+      // let data = await knex("customer_informations")
+      //   .where({ ip: req.body.ip })
+      //   .orderBy("create_date", "desc")
+      //   .first();
+      // data.stil_valid =
+      //   new Date(
+      //     new Date(data.create_date).setHours(
+      //       new Date(data.create_date).getHours() + 2
+      //     )
+      //   ) > new Date();
+      let data = await getCustomerInfoByIp(req.body.ip);
+      res.status(200).json({
+        status: true,
+        message: "Data listelendi",
+        data: data,
+      });
+    } else {
+      res.status(400).json({
+        status: false,
+        message: "Geçersiz istek",
+        data: null,
+      });
+    }
+  }
+);
+
+// export default customerInformationsController;
+module.exports = customerInformationsController;

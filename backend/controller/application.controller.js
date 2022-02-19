@@ -1,6 +1,6 @@
-import express from "express";
-import nodemailer from "nodemailer";
-import dbcon from "../dbconnect/dbconnection";
+const express = require("express");
+const nodemailer = require("nodemailer");
+const dbcon = require("../dbconnect/dbconnection");
 let requestIp = require("request-ip");
 const applicationController = express.Router();
 let con;
@@ -16,14 +16,17 @@ applicationController.get("/api/application/getAll", (req, res) => {
   con = dbcon();
   con.connect(function (err) {
     if (err) throw err;
-    con.query("SELECT * FROM egarsonum.application;", function (err, result) {
-      if (err) throw err;
-      res.status(200).json({
-        status: true,
-        message: "Data Listelendi",
-        data: result,
-      });
-    });
+    con.query(
+      "SELECT * FROM qrgarson_qrgarsonum.application;",
+      function (err, result) {
+        if (err) throw err;
+        res.status(200).json({
+          status: true,
+          message: "Data Listelendi",
+          data: result,
+        });
+      }
+    );
     con.end();
   });
 });
@@ -71,7 +74,7 @@ applicationController.post("/api/application/add", (req, res) => {
     con.connect(function (err) {
       if (err) throw err;
       con.query(
-        "INSERT INTO `egarsonum`.`application`(`company_name`,`name`,`phone`,`email`,`note`) VALUES(" +
+        "INSERT INTO `qrgarson_qrgarsonum`.`application`(`company_name`,`name`,`phone`,`email`,`note`) VALUES(" +
           '"' +
           req.body.companyName +
           '"' +
@@ -105,8 +108,10 @@ applicationController.post("/api/application/add", (req, res) => {
     });
   }
 });
-applicationController.get("/deneme", (req, res) => {
+applicationController.get("/api/deneme", (req, res) => {
   let clientIp = requestIp.getClientIp(req);
-  res.send(clientIp);
+  console.log(clientIp);
+  res.redirect("https://www.google.com");
 });
-export default applicationController;
+// export default applicationController;
+module.exports = applicationController;

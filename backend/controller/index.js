@@ -1,2 +1,2 @@
-import applicationController from "./application.controller";
-export { applicationController };
+// import applicationController from "./application.controller";
+// export { applicationController };

@@ -142,23 +142,21 @@ export default function WelcomeRegister() {
           ></Input>
           <FormFeedback>{formik.errors.note}</FormFeedback>
         </FormGroup>
-        <Button color="primary" className="mt-2" type="submit">
+        <Button
+          color="primary"
+          className="mt-2"
+          type="submit"
+          style={{ width: "100%" }}
+        >
           Başvur
         </Button>
         <div>
           <a
-            href="https://wa.me/905313966281"
-            className="btn btn-success mt-2"
-            style={{ marginLeft: "1em" }}
-          >
-            <i className="bi bi-whatsapp"></i> Whatsapp +90 531 396 6281
-          </a>
-          <a
-            href="mailto:egarsonum@gmail.com"
+            href="mailto:iletisim@qrgarsonum.com"
             className="btn btn-danger mt-2"
-            style={{ marginLeft: "1em" }}
+            style={{ width:"100%" }}
           >
-            <i className="bi bi-envelope"></i> Mail egarsonum@gmail.com
+            <i className="bi bi-envelope"></i> Mail iletisim@qrgarsonum.com
           </a>
         </div>
       </Form>

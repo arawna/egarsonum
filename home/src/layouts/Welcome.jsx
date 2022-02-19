@@ -440,9 +440,9 @@ export default function Welcome() {
           </p>
           <p>
             <b>Demo</b> taleplerinizi aşağıda bulunan talep formunu doldurarak
-            veya bizlere <span style={{ color: "red" }}>0531 396 62 81</span>{" "}
-            numaralı telefondan ulaşarak iletebilirsiniz. 15 dakika içerisinde
-            dönüş yapılacaktır.
+            veya bizlere{" "}
+            <span style={{ color: "red" }}>iletisim@qrgarsonum.com</span>{" "}
+            mailinden ulaşarak iletebilirsiniz.
           </p>
           <button className="btn btn-danger btn-lg" onClick={toogleModal}>
             Demo Talebi
