@@ -1,12 +1,5 @@
-const knex = require("knex")({
-  client: "mysql2",
-  connection: {
-    host: "127.0.0.1",
-    user: "root",
-    password: "1220fb1220",
-    database: "egarsonum",
-  },
-});
+const kenxConnection = require("../dbconnect/knexconnection");
+const knex = require("knex")(kenxConnection);
 const getCustomerInfoByIp = async (ip) => {
   let data = await knex("customer_informations")
     .where({ ip: ip })
