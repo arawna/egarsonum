@@ -2,6 +2,9 @@ const express = require("express");
 const nodemailer = require("nodemailer");
 const dbcon = require("../dbconnect/dbconnection");
 let requestIp = require("request-ip");
+const userDb = require("../db/userDb");
+const cafesDb = require("../db/CafesDb");
+const imagesDb = require("../db/imagesDb");
 const applicationController = express.Router();
 let con;
 let transporter = nodemailer.createTransport({
@@ -108,10 +111,41 @@ applicationController.post("/api/application/add", (req, res) => {
     });
   }
 });
-applicationController.get("/api/deneme", (req, res) => {
-  let clientIp = requestIp.getClientIp(req);
-  console.log(clientIp);
-  res.redirect("https://www.google.com");
+applicationController.get("/api/deneme/:textId", (req, res) => {
+  // const { name, data } = req.files.pic;
+  // if (name && data) {
+  //   imagesDb.addImage(name, data).then((response) => {
+  //     res.status(200).json({
+  //       textId: response,
+  //     });
+  //   });
+  // } else {
+  //   res.status(400);
+  // }
+  imagesDb.getImageByTextId(req.params["textId"]).then((response) => {
+    if (response) {
+      res.end(response);
+    } else {
+      res.end("Böyle bir resim yok");
+    }
+  });
+  // cafesDb
+  //   .addCafe(
+  //     req.body.email,
+  //     req.body.pass,
+  //     req.body.cafeName,
+  //     req.body.tableAmount,
+  //     req.body.createDate,
+  //     req.body.lastDate
+  //   )
+  //   .then(() => {
+  //     res.status(200).json({
+  //       durum: "Eklendi",
+  //     });
+  //   });
+  // cafesDb.getAllCafes().then((response) => {
+  //   res.status(200).json(response);
+  // });
 });
 // export default applicationController;
 module.exports = applicationController;
