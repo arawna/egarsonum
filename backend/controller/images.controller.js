@@ -1,14 +1,7 @@
 const express = require("express");
 const imagesController = express.Router();
-const knex = require("knex")({
-  client: "mysql2",
-  connection: {
-    host: "127.0.0.1",
-    user: "qrgarson_ali",
-    password: "alialiFb777.",
-    database: "qrgarson_qrgarsonum",
-  },
-});
+const kenxConnection = require("../dbconnect/knexconnection");
+const knex = require("knex")(kenxConnection);
 // knex.migrate.latest();
 
 imagesController.post("/api/imgupload", async (req, res) => {

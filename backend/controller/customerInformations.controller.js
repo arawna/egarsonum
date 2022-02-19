@@ -3,15 +3,8 @@ const requestIp = require("request-ip");
 const CryptoJS = require("crypto-js");
 const AES = require("crypto-js/aes");
 const dbcon = require("../dbconnect/dbconnection");
-const knex = require("knex")({
-  client: "mysql2",
-  connection: {
-    host: "127.0.0.1",
-    user: "root",
-    password: "1220fb1220",
-    database: "egarsonum",
-  },
-});
+const kenxConnection = require("../dbconnect/knexconnection");
+const knex = require("knex")(kenxConnection);
 const getCustomerInfoByIp = require("../core/customer");
 const customerInformationsController = express.Router();
 
