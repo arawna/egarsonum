@@ -13,6 +13,16 @@ const getByIdCafe = async (cafeId) => {
   return await knex("cafes").where({ cafe_id: cafeId }).first();
 };
 
+const getCafeByEmail = async (email) => {
+  let data = await knex
+    .select("*")
+    .from("cafes")
+    .innerJoin("users", "cafes.cafe_id", "users.id")
+    .where("users.email", email)
+    .first();
+  return data;
+};
+
 const addCafe = async (
   email,
   pass,
@@ -40,6 +50,7 @@ const cafesDb = {
   getAllCafes: getAllCafes,
   getByIdCafe: getByIdCafe,
   addCafe: addCafe,
+  getCafeByEmail: getCafeByEmail,
 };
 
 module.exports = cafesDb;
