@@ -26,7 +26,8 @@ cafesController.post("/api/cafelogin", async (req, res) => {
               req.body.pass,
               result.cafe_id,
               result.table_amount,
-              result.last_date
+              result.last_date,
+              result.name
             );
             res.status(200).json({
               status: true,
@@ -58,10 +59,28 @@ cafesController.post("/api/cafelogin", async (req, res) => {
   }
 });
 
-cafesController.post("/api/validate", async (req, res) => {
-  res.status(200).json({
-    cozum: tokenService.validateToken(req.body.token),
-  });
+cafesController.post("/api/getCafeDetailsByToken", async (req, res) => {
+  if (req.body.token) {
+    if (tokenService.validateToken(req.body.token)) {
+      res.status(200).json({
+        status: true,
+        message: "Detaylar listelendi",
+        data: tokenService.getDetailToken(req.body.token),
+      });
+    } else {
+      res.status(401).json({
+        status: false,
+        message: "Token süresi geçti",
+        data: null,
+      });
+    }
+  } else {
+    res.status(400).json({
+      status: false,
+      message: "Kötü istek",
+      data: null,
+    });
+  }
 });
 
 module.exports = cafesController;

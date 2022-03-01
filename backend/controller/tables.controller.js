@@ -35,12 +35,22 @@ tablesController.post("/api/tables/addTable", async (req, res) => {
   if (req.body.token && req.body.tableNo) {
     if (tokenService.validateToken(req.body.token)) {
       let tokenData = tokenService.getDetailToken(req.body.token);
-      tablesDb.addTable(tokenData.cafeId, req.body.tableNo).then(() => {
-        res.status(200).json({
-          status: true,
-          message: "Masa eklendi",
-          data: null,
-        });
+      tablesDb.getTablesByCafeId(tokenData.cafeId).then((result) => {
+        if (result.length >= tokenData.tableAmount) {
+          res.status(400).json({
+            status: false,
+            message: "Maksimum masa sayısına ulaştınız",
+            data: null,
+          });
+        } else {
+          tablesDb.addTable(tokenData.cafeId, req.body.tableNo).then(() => {
+            res.status(200).json({
+              status: true,
+              message: "Masa eklendi",
+              data: null,
+            });
+          });
+        }
       });
     } else {
       res.status(404).json({
@@ -58,7 +68,7 @@ tablesController.post("/api/tables/addTable", async (req, res) => {
   }
 });
 
-tablesController.delete("/api/tables/deleteTable", async (req, res) => {
+tablesController.post("/api/tables/deleteTable", async (req, res) => {
   if (req.body.token && req.body.tableId) {
     if (tokenService.validateToken(req.body.token)) {
       let tokenData = tokenService.getDetailToken(req.body.token);

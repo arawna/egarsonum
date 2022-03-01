@@ -19,9 +19,14 @@ const getImageByTextId = async (textId) => {
   }
 };
 
+const deleteImageByTextId = async (textId) => {
+  await knex("images").where({ text_id: textId }).del();
+};
+
 const imagesDb = {
   addImage: addImage,
   getImageByTextId: getImageByTextId,
+  deleteImageByTextId: deleteImageByTextId,
 };
 
 module.exports = imagesDb;

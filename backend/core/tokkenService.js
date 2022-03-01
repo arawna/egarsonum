@@ -2,13 +2,14 @@ const CryptoJS = require("crypto-js");
 const AES = require("crypto-js/aes");
 const randomText = require("./randomText");
 
-const createTokken = (email, pass, cafeId, tableAmount, lastDate) => {
+const createTokken = (email, pass, cafeId, tableAmount, lastDate, name) => {
   let cafeJson = {
     email: email,
     pass: pass,
     cafeId: cafeId,
     tableAmount: tableAmount,
     lastDate: lastDate,
+    name: name,
     tokenCreate: new Date().toISOString(),
     randomString: randomText(10),
   };
