@@ -45,3 +45,37 @@
 /siparisnpm-debug.log*
 /siparisyarn-debug.log*
 /siparisyarn-error.log*
+
+
+
+# dependencies
+/cafe/node_modules
+/cafe/.pnp
+/cafe.pnp.js
+
+# testing
+/cafe/coverage
+
+# production
+/cafe/build
+
+# misc
+/cafe.DS_Store
+/cafe.env.local
+/cafe.env.development.local
+/cafe.env.test.local
+/cafe.env.production.local
+/cafe.idea
+/cafe.idea/crema.iml
+/cafe.idea/dictionaries/yogi0.xml
+/cafe.idea/inspectionProfiles/Project_Default.xml
+/cafe.idea/misc.xml
+/cafe.idea/modules.xml
+/cafe.idea/vcs.xml
+/cafe.idea/workspace.xml
+/cafe.idea/*
+
+/cafe/npm-debug.log*
+/cafe/yarn-debug.log*
+/cafe/yarn-error.log*
+/cafe/yarn.lock
