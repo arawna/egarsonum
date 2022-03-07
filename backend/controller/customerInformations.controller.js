@@ -15,7 +15,7 @@ customerInformationsController.get("/api/cafe/:cafetext", async (req, res) => {
   ).toString(CryptoJS.enc.Utf8);
   if (!cafeAndTable) {
     //sifreli metin geçersizse yönlendirme
-    res.redirect("https://google.com");
+    res.redirect("https://qrgarsonum.com");
   } else {
     //sifreli medin geçerli ise
     //db kayıt ve yönlendirme yapılacak
@@ -62,6 +62,13 @@ customerInformationsController.post(
     }
   }
 );
+
+customerInformationsController.get("/api/getMyIp", async (req, res) => {
+  let clientIp = requestIp.getClientIp(req);
+  res.status(200).json({
+    ip: clientIp,
+  });
+});
 
 // export default customerInformationsController;
 module.exports = customerInformationsController;

@@ -13,11 +13,11 @@ export default function TableQrModal({ selectedTableForQr }) {
           )
         }
       />
-      {/* {selectedTableForQr.cafeId} - {selectedTableForQr.tableId}
+      {selectedTableForQr.cafeId} - {selectedTableForQr.tableId}
       {'http://localhost:5000/api/cafe/' +
         encodeURIComponent(
           CryptoJS.AES.encrypt(selectedTableForQr.cafeId + '----' + selectedTableForQr.tableId, 'ali').toString(),
-        )} */}
+        )}
     </div>
   );
 }
