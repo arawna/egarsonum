@@ -25,6 +25,12 @@ export const sidebarNavs = [
         icon: <PostAdd />,
         link: '/categories',
       },
+      {
+        name: 'Ürünler',
+        type: 'item',
+        icon: <PostAdd />,
+        link: '/products',
+      },
     ],
   },
 ];

@@ -9,6 +9,9 @@ import Tables from './Pages/Tables/Tables';
 import CafesService from 'services/api/cafesService';
 import { userLogin } from 'redux/actions/AuthNew';
 import Categories from './Pages/Categories/Categories';
+import Products from './Pages/Products/Products';
+import { NotificationContainer } from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 // import Register from './Auth/Register';
 // import ForgotPasswordPage from './Auth/ForgotPassword';
 
@@ -108,11 +111,13 @@ const Routes = () => {
 
   return (
     <React.Fragment>
+      <NotificationContainer />
       <Switch>
         <Route path="/sample-page" component={SamplePage} />
         <Route path="/signin" component={Login} />
         <Route path="/tables" component={Tables} />
         <Route path="/categories" component={Categories} />
+        <Route path="/products" component={Products} />
         {/* <Route path="/signup" component={Register} />
         <Route path="/forgot-password" component={ForgotPasswordPage} /> */}
         <Route component={Error404} />

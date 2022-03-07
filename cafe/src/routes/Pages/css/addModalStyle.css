@@ -1,0 +1,22 @@
+.addModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 2px solid #000;
+  box-shadow: 24;
+  padding: 20px;
+}
+
+@media screen and (min-width: 0px) and (max-width: 768px) {
+  .addModal {
+    width: 80%;
+  } /* show it on small screens */
+}
+
+@media screen and (min-width: 767px) {
+  .addModal {
+    width: 50%;
+  } /* hide it elsewhere */
+}

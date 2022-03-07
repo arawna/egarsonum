@@ -1,11 +1,9 @@
-import PageContainer from '@jumbo/components/PageComponents/layouts/PageContainer';
-import { Add } from '@material-ui/icons';
-import { Box, Button, Modal } from '@mui/material';
 import React, { useState } from 'react';
-import CategoriesList from './CategoriesList';
-import CategoryAddModal from './CategoryAddModal';
-import { NotificationContainer } from 'react-notifications';
-import 'react-notifications/lib/notifications.css';
+import PageContainer from '@jumbo/components/PageComponents/layouts/PageContainer';
+import { Box, Button, Modal } from '@mui/material';
+import { Add } from '@material-ui/icons';
+import AddProductModal from './AddProductModal';
+import ProductsList from './ProductsList';
 import '../css/addModalStyle.css';
 
 // const style = {
@@ -20,27 +18,26 @@ import '../css/addModalStyle.css';
 //   p: 4,
 // };
 
-export default function Categories() {
+export default function Products() {
   const breadcrumbs = [
     { label: 'Ana Menü', link: '/' },
-    { label: 'Kategoriler', isActive: true },
+    { label: 'Ürünler', isActive: true },
   ];
 
   const [addModalOpen, setAddModalOpen] = React.useState(false);
   const handleAddModalOpen = () => setAddModalOpen(true);
   const handleAddModalClose = () => setAddModalOpen(false);
 
-  let [reloadValues, setReloadValues] = useState('0');
+  const [reloadValues, setReloadValues] = useState(new Date().getTime().toString());
 
   return (
-    <PageContainer heading="Kategoriler" breadcrumbs={breadcrumbs}>
-      <NotificationContainer />
-      <div style={{ textAlign: 'right', marginBottom: '20px' }}>
-        <Button variant="contained" onClick={() => handleAddModalOpen()}>
-          <Add /> Kategori Ekle
+    <PageContainer heading="Ürünler" breadcrumbs={breadcrumbs}>
+      <div style={{ textAlign: 'right' }}>
+        <Button onClick={() => handleAddModalOpen()} variant="contained">
+          <Add /> Ürün Ekle
         </Button>
       </div>
-      <CategoriesList reloadValues={reloadValues} setReloadValues={setReloadValues} />
+      <ProductsList setAddModalOpen={setAddModalOpen} reloadValues={reloadValues} setReloadValues={setReloadValues} />
 
       <Modal
         open={addModalOpen}
@@ -48,7 +45,11 @@ export default function Categories() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
         <Box className="addModal">
-          <CategoryAddModal handleAddModalClose={handleAddModalClose} setReloadValues={setReloadValues} />
+          <AddProductModal
+            handleAddModalClose={handleAddModalClose}
+            setReloadValues={setReloadValues}
+            reloadValues={reloadValues}
+          />
         </Box>
       </Modal>
     </PageContainer>
