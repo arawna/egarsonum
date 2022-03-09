@@ -22,6 +22,22 @@ productsController.post("/api/products/getByCafeId", async (req, res) => {
   }
 });
 
+productsController.post("/api/products/getByCategoryId", async (req, res) => {
+  if (req.body.categoryId) {
+    res.status(200).json({
+      status: true,
+      message: "Ürünler listelendi",
+      data: await productsDb.getProductsByCategoryId(req.body.categoryId),
+    });
+  } else {
+    res.status(400).json({
+      status: false,
+      message: "Kötü istek",
+      data: null,
+    });
+  }
+});
+
 productsController.post("/api/products/addProduct", async (req, res) => {
   if (
     req.body.token &&

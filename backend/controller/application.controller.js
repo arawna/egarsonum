@@ -19,17 +19,14 @@ applicationController.get("/api/application/getAll", (req, res) => {
   con = dbcon();
   con.connect(function (err) {
     if (err) throw err;
-    con.query(
-      "SELECT * FROM qrgarson_qrgarsonum.application;",
-      function (err, result) {
-        if (err) throw err;
-        res.status(200).json({
-          status: true,
-          message: "Data Listelendi",
-          data: result,
-        });
-      }
-    );
+    con.query("SELECT * FROM egarsonum.application;", function (err, result) {
+      if (err) throw err;
+      res.status(200).json({
+        status: true,
+        message: "Data Listelendi",
+        data: result,
+      });
+    });
     con.end();
   });
 });

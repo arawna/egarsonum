@@ -5,6 +5,10 @@ import Navi from "./Components/Navi";
 import Categories from "./Pages/Categories";
 import CustomerInfoService from "./Services/CustomerInfoService";
 import { userLogin } from "./Store/actions/authActions";
+import { Routes, Route } from "react-router-dom";
+import Cart from "./Pages/Cart";
+import { NotificationContainer } from "react-notifications";
+import "react-notifications/lib/notifications.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,10 +34,20 @@ function App() {
     });
   }, [dispatch]);
 
+  // sepet ürün ekleme silme
+  // dispatch(cartAdd({ productId: 1, name: "Kahve" }));
+  // dispatch(cartAdd({ productId: 2, name: "Pizza" }));
+  // dispatch(cartDell(2));
+
   return (
     <div className="App">
+      <NotificationContainer />
       <Navi />
-      <Categories />
+      <Routes>
+        <Route path="/" element={<Categories />} />
+        <Route path="/sepet" element={<Cart />} />
+      </Routes>
+
       <BottomNavi />
     </div>
   );

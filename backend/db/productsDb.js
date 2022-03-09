@@ -17,6 +17,22 @@ const getProductsByCafeId = async (cafeId) => {
     );
 };
 
+const getProductsByCategoryId = async (categoryId) => {
+  return await knex("products")
+    .where("products.category_id", categoryId)
+    .innerJoin("categories", "products.category_id", "categories.id")
+    .select(
+      "products.product_id",
+      "products.cafe_id",
+      { category_name: "categories.name" },
+      "products.category_id",
+      "products.product_name",
+      "products.product_price",
+      "products.product_description",
+      "products.product_img_url"
+    );
+};
+
 const getProductByProductId = async (productId) => {
   return await knex("products").where({ product_id: productId }).first();
 };
@@ -68,6 +84,7 @@ const productsDb = {
   addProduct: addProduct,
   deleteProductByProductId: deleteProductByProductId,
   updateProduct: updateProduct,
+  getProductsByCategoryId: getProductsByCategoryId,
 };
 
 module.exports = productsDb;

@@ -29,7 +29,7 @@ customerInformationsController.get("/api/cafe/:cafetext", async (req, res) => {
         create_date: new Date().toISOString().slice(0, 19).replace("T", " "),
       })
       .into("customer_informations");
-    res.redirect("http://localhost:5000");
+    res.redirect("http://localhost:3001");
   }
 });
 
