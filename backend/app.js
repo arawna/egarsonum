@@ -9,6 +9,7 @@ const cafesController = require("./controller/cafes.controller");
 const tablesController = require("./controller/tables.controller");
 const categoriesController = require("./controller/categories.controller");
 const productsController = require("./controller/products.controller");
+const orderController = require("./controller/order.controller");
 const app = express();
 app.use(cors());
 // Use your dependencies here
@@ -23,6 +24,7 @@ app.use("/", cafesController);
 app.use("/", tablesController);
 app.use("/", categoriesController);
 app.use("/", productsController);
+app.use("/", orderController);
 // Start Server here
 const port = process.env.PORT || 5000;
 app.listen(port, () => {

@@ -5,9 +5,11 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import { useDispatch } from "react-redux";
 import { cartAdd } from "../Store/actions/cartActions";
 import { NotificationManager } from "react-notifications";
+import swal from "sweetalert";
 
 export default function CartAddModal({ selectedProduct, handleClose }) {
   let [amount, setAmount] = useState(1);
+  let [note, setNote] = useState("");
 
   const addAmount = () => {
     setAmount(amount + 1);
@@ -27,10 +29,22 @@ export default function CartAddModal({ selectedProduct, handleClose }) {
         productName: selectedProduct.product_name,
         productPrice: selectedProduct.product_price,
         amount: amount,
+        note: note,
       })
+    );
+    swal(
+      "Ürün sepetinize eklendi sepetinize giderek siparişi tamamlayabilirsiniz",
+      {
+        icon: "success",
+        buttons: "Tamam",
+      }
     );
     NotificationManager.success("Ürün Sepete Eklendi", "Eklendi", 3000);
     handleClose();
+  };
+
+  const handleChangeNote = (event) => {
+    setNote(event.target.value);
   };
 
   return (
@@ -45,7 +59,12 @@ export default function CartAddModal({ selectedProduct, handleClose }) {
       >
         <Grid item xs={10}>
           <p
-            style={{ marginTop: "20px", marginLeft: "17px", fontWeight: "600" }}
+            style={{
+              marginTop: "20px",
+              marginLeft: "17px",
+              fontWeight: "600",
+              color: "#3d3d33",
+            }}
           >
             {selectedProduct.product_name}
           </p>
@@ -60,13 +79,14 @@ export default function CartAddModal({ selectedProduct, handleClose }) {
           >
             <span
               style={{
-                backgroundColor: "gray",
+                backgroundColor: "#5e5e4d",
                 paddingTop: "5px",
                 paddingBottom: "5px",
                 paddingLeft: "10px",
                 paddingRight: "10px",
                 borderRadius: "50%",
                 cursor: "pointer",
+                color: "white",
               }}
               onClick={() => handleClose()}
             >
@@ -147,6 +167,7 @@ export default function CartAddModal({ selectedProduct, handleClose }) {
           label="Not"
           multiline
           rows={4}
+          onChange={handleChangeNote}
           style={{ width: "100%" }}
         />
       </div>
