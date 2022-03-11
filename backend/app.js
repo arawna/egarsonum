@@ -1,6 +1,7 @@
 const fileUpload = require("express-fileupload");
 const express = require("express");
 const cors = require("cors");
+const http = require("http");
 const bodyParser = require("body-parser");
 const applicationController = require("./controller/application.controller");
 const imagesController = require("./controller/images.controller");
@@ -12,6 +13,13 @@ const productsController = require("./controller/products.controller");
 const orderController = require("./controller/order.controller");
 const app = express();
 app.use(cors());
+const server = http.createServer(app);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: ["http://localhost:3000", "http://localhost:3001"],
+    methods: ["GET", "POST"],
+  },
+});
 // Use your dependencies here
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -25,8 +33,25 @@ app.use("/", tablesController);
 app.use("/", categoriesController);
 app.use("/", productsController);
 app.use("/", orderController);
+
+// app.get("/api/sockdene", (req, res) => {
+//   io.to("3").emit("siparis", 0);
+//   res.send("deneme");
+// });
+
+io.on("connection", (socket) => {
+  console.log("Bağlandı: " + socket.id);
+  socket.on("joincafeId", (cafeId) => {
+    console.log(cafeId + " Ye girildi");
+    socket.join(cafeId);
+  });
+  socket.on("siparis", (cafeId) => {
+    io.to(cafeId).emit("siparis");
+  });
+});
+
 // Start Server here
 const port = process.env.PORT || 5000;
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server is running on port ${port}!`);
 });

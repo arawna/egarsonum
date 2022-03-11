@@ -13,6 +13,9 @@ import swal from "sweetalert";
 import AddAlertIcon from "@mui/icons-material/AddAlert";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import OrderService from "../Services/OrderService";
+import socketIOClient from "socket.io-client";
+
+const socket = socketIOClient("http://localhost:5000");
 
 export default function Cart() {
   const { cartItem } = useSelector(({ cart }) => cart);
@@ -49,12 +52,13 @@ export default function Cart() {
         })
         .then((result) => {
           console.log(result);
+          socket.emit("siparis", authItem[0].cafeId.toString());
+          dispatch(cartClear());
+          swal("Sipariş verildi!", {
+            icon: "success",
+            buttons: "Tamam",
+          });
         });
-      dispatch(cartClear());
-      swal("Sipariş verildi!", {
-        icon: "success",
-        buttons: "Tamam",
-      });
     } else {
       swal("Sepetiniz boş önce sepetinize birşeyler eklemelisiniz", {
         icon: "warning",

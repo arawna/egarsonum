@@ -33,24 +33,86 @@ orderController.post("/api/order/add", async (req, res) => {
   }
 });
 
-orderController.post("/api/order/getActiveOrdersByCafeId", async (req, res) => {
-  if (req.body.token) {
-    if (tokenService.validateToken(req.body.token)) {
-      orderItemsDb
-        .getActiceOrdersByCafeId(
-          tokenService.getDetailToken(req.body.token).cafeId
-        )
-        .then((result) => {
-          res.status(200).json({
-            status: true,
-            message: "Data listelendi",
-            data: result,
+orderController.post(
+  "/api/order/getActiveAndNotSeenOrdersByCafeId",
+  async (req, res) => {
+    if (req.body.token) {
+      if (tokenService.validateToken(req.body.token)) {
+        orderItemsDb
+          .getActiceAndNotSeenOrdersByCafeId(
+            tokenService.getDetailToken(req.body.token).cafeId
+          )
+          .then((result) => {
+            res.status(200).json({
+              status: true,
+              message: "Data listelendi",
+              data: result,
+            });
           });
+      } else {
+        res.status(401).json({
+          status: false,
+          message: "Token süresi geçti",
+          data: null,
         });
+      }
+    } else {
+      res.status(400).json({
+        status: false,
+        message: "Kötü istek",
+        data: null,
+      });
+    }
+  }
+);
+
+orderController.post(
+  "/api/order/getActiveAndSeenOrdersByCafeId",
+  async (req, res) => {
+    if (req.body.token) {
+      if (tokenService.validateToken(req.body.token)) {
+        orderItemsDb
+          .getActiveAndSeenOrdersByCafeId(
+            tokenService.getDetailToken(req.body.token).cafeId
+          )
+          .then((result) => {
+            res.status(200).json({
+              status: true,
+              message: "Data listelendi",
+              data: result,
+            });
+          });
+      } else {
+        res.status(401).json({
+          status: false,
+          message: "Token süresi geçti",
+          data: null,
+        });
+      }
+    } else {
+      res.status(400).json({
+        status: false,
+        message: "Kötü istek",
+        data: null,
+      });
+    }
+  }
+);
+
+orderController.post("/api/order/setSeenTrue", async (req, res) => {
+  if (req.body.token && req.body.orderId) {
+    if (tokenService.validateToken(req.body.token)) {
+      orderItemsDb.setSeenTrueByOrderId(req.body.orderId).then(() => {
+        res.status(200).json({
+          status: true,
+          message: "Görültü olarak işaretlendi",
+          data: null,
+        });
+      });
     } else {
       res.status(401).json({
         status: false,
-        message: "Token süresi geçti",
+        message: "Token süre geçmiş",
         data: null,
       });
     }
