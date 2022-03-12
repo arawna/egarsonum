@@ -14,8 +14,9 @@ import AddAlertIcon from "@mui/icons-material/AddAlert";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import OrderService from "../Services/OrderService";
 import socketIOClient from "socket.io-client";
+import baseUrl from "../Services/baseUrl";
 
-const socket = socketIOClient("http://localhost:5000");
+const socket = socketIOClient(baseUrl);
 
 export default function Cart() {
   const { cartItem } = useSelector(({ cart }) => cart);

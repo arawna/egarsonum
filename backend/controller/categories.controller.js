@@ -98,7 +98,7 @@ categoriesController.post("/api/categories/delete", async (req, res) => {
 categoriesController.post("/api/categories/update", async (req, res) => {
   if (req.body.name && req.body.token && req.body.categoryId) {
     if (tokenService.validateToken(req.body.token)) {
-      if (req.files?.pic !== undefined) {
+      if (req.files) {
         categoriesDb
           .getCategoryByCategoryId(req.body.categoryId)
           .then((result) => {

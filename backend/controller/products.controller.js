@@ -94,7 +94,7 @@ productsController.post("/api/products/updateProduct", async (req, res) => {
     req.body.productId
   ) {
     if (tokenService.validateToken(req.body.token)) {
-      if (req.files?.pic !== undefined) {
+      if (req.files) {
         //resim varsa yapılacaklar
         productsDb.getProductByProductId(req.body.productId).then((result) => {
           imagesDb

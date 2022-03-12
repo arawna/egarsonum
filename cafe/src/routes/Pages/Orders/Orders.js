@@ -2,11 +2,12 @@ import PageContainer from '@jumbo/components/PageComponents/layouts/PageContaine
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import baseUrl from 'services/api/basurl';
 import OrdersService from 'services/api/OrdersService';
 import socketIOClient from 'socket.io-client';
 import swal from 'sweetalert';
 
-const socket = socketIOClient('http://localhost:5000');
+const socket = socketIOClient(baseUrl);
 
 export default function Orders() {
   const breadcrumbs = [

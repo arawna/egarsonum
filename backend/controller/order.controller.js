@@ -125,4 +125,61 @@ orderController.post("/api/order/setSeenTrue", async (req, res) => {
   }
 });
 
+orderController.post(
+  "/api/order/getActiceOrdersByTableId",
+  async (req, res) => {
+    if (req.body.token && req.body.tableId) {
+      if (tokenService.validateToken(req.body.token)) {
+        orderItemsDb
+          .getActiveOrdersByTableId(req.body.tableId)
+          .then((result) => {
+            res.status(200).json({
+              status: true,
+              message: "Data listelendi",
+              data: result,
+            });
+          });
+      } else {
+        res.status(401).json({
+          status: false,
+          message: "Token geçersiz",
+          data: null,
+        });
+      }
+    } else {
+      res.status(400).json({
+        status: false,
+        message: "Kötü istek",
+        data: null,
+      });
+    }
+  }
+);
+
+orderController.post("/api/order/setActiveFalseByTableId", async (req, res) => {
+  if (req.body.token && req.body.tableId) {
+    if (tokenService.validateToken(req.body.token)) {
+      orderItemsDb.setActiveFalseByTableId(req.body.tableId).then(() => {
+        res.status(200).json({
+          status: true,
+          message: "Hesap ödendi olarak işaretlendi",
+          data: null,
+        });
+      });
+    } else {
+      res.status(401).json({
+        status: false,
+        message: "Token geçersiz",
+        data: null,
+      });
+    }
+  } else {
+    res.status(400).json({
+      status: false,
+      message: "Kötü istek",
+      data: null,
+    });
+  }
+});
+
 module.exports = orderController;

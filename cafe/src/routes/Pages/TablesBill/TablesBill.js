@@ -7,6 +7,8 @@ import Button from '@mui/material/Button';
 import 'react-notifications/lib/notifications.css';
 import '../css/addModalStyle.css';
 import PageContainer from '@jumbo/components/PageComponents/layouts/PageContainer';
+import { Box, Modal } from '@mui/material';
+import TableBillModal from './TableBillModal';
 
 export default function TablesBill() {
   const breadcrumbs = [
@@ -26,6 +28,16 @@ export default function TablesBill() {
     getTablesData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const [selectedTable, setSelectedTable] = useState({});
+  const handleShowBtnClick = table => {
+    setSelectedTable(table);
+    handleOpen();
+  };
 
   return (
     <PageContainer heading="Masa Hesapları" breadcrumbs={breadcrumbs}>
@@ -52,7 +64,10 @@ export default function TablesBill() {
               </GridContainer>
               <GridContainer>
                 <Grid item md={12} xs={12} style={{ textAlign: 'center' }}>
-                  <Button variant="outlined" style={{ borderColor: 'white', color: 'white' }}>
+                  <Button
+                    variant="outlined"
+                    style={{ borderColor: 'white', color: 'white' }}
+                    onClick={() => handleShowBtnClick(table)}>
                     Hesabı Görüntüle
                   </Button>
                 </Grid>
@@ -61,6 +76,15 @@ export default function TablesBill() {
           </Grid>
         ))}
       </GridContainer>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description">
+        <Box className="addModal">
+          <TableBillModal table={selectedTable} handleClose={handleClose} />
+        </Box>
+      </Modal>
     </PageContainer>
   );
 }

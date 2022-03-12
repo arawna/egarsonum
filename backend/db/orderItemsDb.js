@@ -78,11 +78,23 @@ const setSeenTrueByOrderId = async (orderId) => {
   await knex("order_items").where({ id: orderId }).update({ seen: true });
 };
 
+const getActiveOrdersByTableId = async (tableId) => {
+  return await knex("order_items").where({ table_id: tableId, active: true });
+};
+
+const setActiveFalseByTableId = async (tableId) => {
+  await knex("order_items")
+    .where({ table_id: tableId, active: true })
+    .update({ active: false });
+};
+
 const orderItemsDb = {
   addOrderItem: addOrderItem,
   getActiceAndNotSeenOrdersByCafeId: getActiceAndNotSeenOrdersByCafeId,
   getActiveAndSeenOrdersByCafeId: getActiveAndSeenOrdersByCafeId,
   setSeenTrueByOrderId: setSeenTrueByOrderId,
+  getActiveOrdersByTableId: getActiveOrdersByTableId,
+  setActiveFalseByTableId: setActiveFalseByTableId,
 };
 
 module.exports = orderItemsDb;
