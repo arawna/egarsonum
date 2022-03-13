@@ -15,7 +15,7 @@ export const SIDEBAR_TYPE = {
   DRAWER: 'drawer',
 };
 export const Fonts = {
-  PRIMARY: 'Normal',
+  PRIMARY: "'Poppins', sans-serif",
 };
 
 export const THEME_TYPES = {

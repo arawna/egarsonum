@@ -21,10 +21,10 @@ export default function Products({ categoryId }) {
   return (
     <div>
       <Swiper
-        spaceBetween={50}
-        slidesPerView={1.5}
-        slidesOffsetBefore={80}
-        slidesOffsetAfter={80}
+        spaceBetween={40}
+        slidesPerView={1.2}
+        slidesOffsetBefore={40}
+        slidesOffsetAfter={40}
         pagination={{ clickable: true }}
         modules={[Pagination]}
       >

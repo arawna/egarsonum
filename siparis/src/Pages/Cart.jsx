@@ -15,6 +15,8 @@ import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import OrderService from "../Services/OrderService";
 import socketIOClient from "socket.io-client";
 import baseUrl from "../Services/baseUrl";
+import CallWaiterService from "../Services/CallWaiterService";
+import CartVerifyedProducts from "./CartVerifyedProducts";
 
 const socket = socketIOClient(baseUrl);
 
@@ -23,6 +25,8 @@ export default function Cart() {
   const { authItem } = useSelector(({ auth }) => auth);
   let [totalAmount, setTotalAmount] = useState(0);
   let [totalPrice, setTotalPrice] = useState(0);
+
+  let [reloadValues, setReloadValues] = useState("0");
 
   const dispatch = useDispatch();
 
@@ -39,6 +43,10 @@ export default function Cart() {
 
   const handleClearBtnClick = () => {
     dispatch(cartClear());
+    swal("Sepet Temizlendi!", {
+      icon: "success",
+      buttons: "Tamam",
+    });
   };
 
   const handleOrderBtnClick = () => {
@@ -55,6 +63,7 @@ export default function Cart() {
           console.log(result);
           socket.emit("siparis", authItem[0].cafeId.toString());
           dispatch(cartClear());
+          setReloadValues(new Date().getTime().toString());
           swal("Sipariş verildi!", {
             icon: "success",
             buttons: "Tamam",
@@ -66,6 +75,22 @@ export default function Cart() {
         buttons: "Tamam",
       });
     }
+  };
+
+  const handleCallWaiterBtnClick = () => {
+    const callWaiterService = new CallWaiterService();
+    callWaiterService
+      .addCallWaiter(authItem[0].tableId, authItem[0].cafeId)
+      .then((result) => {
+        socket.emit("garson", {
+          cafeId: authItem[0].cafeId.toString(),
+          tableId: authItem[0].tableId.toString(),
+        });
+      });
+    swal("Garson Çağırıldı!", {
+      icon: "success",
+      buttons: "Tamam",
+    });
   };
 
   return (
@@ -260,6 +285,7 @@ export default function Cart() {
             borderRadius: "7px",
             cursor: "pointer",
           }}
+          onClick={() => handleCallWaiterBtnClick()}
         >
           <Grid container>
             <Grid item xs={10}>
@@ -311,6 +337,9 @@ export default function Cart() {
             </Grid>
           </Grid>
         </div>
+      </div>
+      <div>
+        <CartVerifyedProducts reloadValues={reloadValues} />
       </div>
       <div style={{ height: "100px" }} />
     </div>

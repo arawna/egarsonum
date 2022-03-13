@@ -30,6 +30,9 @@ function App() {
             //süre geçmişse
             window.location.href = "https://qrgarsonum.com";
           }
+        })
+        .catch((result3) => {
+          window.location.href = "https://qrgarsonum.com";
         });
     });
   }, [dispatch]);

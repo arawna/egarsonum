@@ -5,6 +5,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 import WidgetsIcon from '@mui/icons-material/Widgets';
+import { EmojiPeople, AccountBalanceWallet } from '@mui/icons-material';
 
 export const sidebarNavs = [
   {
@@ -28,6 +29,18 @@ export const sidebarNavs = [
         type: 'item',
         icon: <TableRestaurantIcon />,
         link: '/table-bill',
+      },
+      {
+        name: 'Garson Çağırma İstekleri',
+        type: 'item',
+        icon: <EmojiPeople />,
+        link: '/call-waiter',
+      },
+      {
+        name: 'Hesap İstekleri',
+        type: 'item',
+        icon: <AccountBalanceWallet />,
+        link: '/call-bill',
       },
     ],
   },

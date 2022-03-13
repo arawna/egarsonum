@@ -1,6 +1,7 @@
 import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import OrdersService from 'services/api/OrdersService';
+import swal from 'sweetalert';
 
 export default function TableBillModal({ table, handleClose }) {
   let [orders, setOrders] = useState([]);
@@ -25,8 +26,12 @@ export default function TableBillModal({ table, handleClose }) {
   const handlePayedBtnClick = () => {
     const ordersService = new OrdersService();
     ordersService.setActiveFalseByTableId(localStorage.getItem('token'), table.id).then(result => {
-      console.log(result.data.message);
       setOrders([]);
+      swal('Hesap ödendi olarak işaretlendi!', {
+        icon: 'success',
+        buttons: 'Tamam',
+      });
+      handleClose();
     });
   };
 

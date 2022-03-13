@@ -95,6 +95,7 @@
     "sweetalert2": "^9.17.1",
     "sweetalert2-react-content": "^3.0.3",
     "typescript": "^3.9.5",
+    "use-react-screenshot": "^3.0.0",
     "yup": "^0.32.11"
   },
   "scripts": {

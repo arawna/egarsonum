@@ -14,6 +14,7 @@ import { NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import Orders from './Pages/Orders/Orders';
 import TablesBill from './Pages/TablesBill/TablesBill';
+import CallWaiter from './Pages/CallWaiter/CallWaiter';
 // import Register from './Auth/Register';
 // import ForgotPasswordPage from './Auth/ForgotPassword';
 
@@ -122,6 +123,7 @@ const Routes = () => {
         <Route path="/products" component={Products} />
         <Route path="/orders" component={Orders} />
         <Route path="/table-bill" component={TablesBill} />
+        <Route path="/call-waiter" component={CallWaiter} />
         {/* <Route path="/signup" component={Register} />
         <Route path="/forgot-password" component={ForgotPasswordPage} /> */}
         <Route component={Error404} />
