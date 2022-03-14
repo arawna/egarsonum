@@ -4,7 +4,7 @@ import TablesList from './TablesList';
 
 export default function Tables() {
   const breadcrumbs = [
-    { label: 'Ana Menü', link: '/' },
+    { label: 'Düzenleme', link: '/' },
     { label: 'Masalar', isActive: true },
   ];
 

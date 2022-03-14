@@ -20,7 +20,7 @@ import '../css/addModalStyle.css';
 
 export default function Products() {
   const breadcrumbs = [
-    { label: 'Ana Menü', link: '/' },
+    { label: 'Düzenleme', link: '/' },
     { label: 'Ürünler', isActive: true },
   ];
 

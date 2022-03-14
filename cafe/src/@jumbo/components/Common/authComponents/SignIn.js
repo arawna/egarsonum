@@ -13,6 +13,7 @@ import AuthWrapper from './AuthWrapper';
 import CafesService from 'services/api/cafesService';
 import { userLogin } from 'redux/actions/AuthNew';
 import { useHistory } from 'react-router';
+import { NotificationManager } from 'react-notifications';
 
 const useStyles = makeStyles(theme => ({
   authThumb: {
@@ -66,21 +67,26 @@ const SignIn = ({ method = CurrentAuthMethod, variant = 'default', wrapperVarian
   const history = useHistory();
 
   const onSubmit = () => {
-    cafesService.login({ email: email, pass: password }).then(res => {
-      localStorage.setItem('token', res.data.data.token);
-      dispatch(
-        userLogin({
-          email: res.data.data.email,
-          id: res.data.data.id,
-          lastDate: res.data.data.last_date,
-          name: res.data.data.name,
-          pass: res.data.data.password,
-          tableAmount: res.data.data.table_amount,
-          token: res.data.data.token,
-        }),
-      );
-      history.push('/sample-page');
-    });
+    cafesService
+      .login({ email: email, pass: password })
+      .then(res => {
+        localStorage.setItem('token', res.data.data.token);
+        dispatch(
+          userLogin({
+            email: res.data.data.email,
+            id: res.data.data.id,
+            lastDate: res.data.data.last_date,
+            name: res.data.data.name,
+            pass: res.data.data.password,
+            tableAmount: res.data.data.table_amount,
+            token: res.data.data.token,
+          }),
+        );
+        history.push('/');
+      })
+      .catch(result => {
+        NotificationManager.error(result.response.data.message, 'Hata', 3000);
+      });
     // dispatch(AuhMethods[method].onLogin({ email, password }));
   };
 

@@ -15,6 +15,7 @@ import 'react-notifications/lib/notifications.css';
 import Orders from './Pages/Orders/Orders';
 import TablesBill from './Pages/TablesBill/TablesBill';
 import CallWaiter from './Pages/CallWaiter/CallWaiter';
+import CallBill from './Pages/CallBill/CallBill';
 // import Register from './Auth/Register';
 // import ForgotPasswordPage from './Auth/ForgotPassword';
 
@@ -90,7 +91,7 @@ const Routes = () => {
   if (!localStorage.getItem('token') && location.pathname !== '/signin') {
     history.push('/signin');
   } else if (localStorage.getItem('token') && location.pathname === '/signin') {
-    return <Redirect to={'/sample-page'} />;
+    return <Redirect to={'/orders'} />;
   }
 
   // if (localStorage.getItem('token')) {
@@ -122,8 +123,10 @@ const Routes = () => {
         <Route path="/categories" component={Categories} />
         <Route path="/products" component={Products} />
         <Route path="/orders" component={Orders} />
+        <Route exact path="/" component={Orders} />
         <Route path="/table-bill" component={TablesBill} />
         <Route path="/call-waiter" component={CallWaiter} />
+        <Route path="/call-bill" component={CallBill} />
         {/* <Route path="/signup" component={Register} />
         <Route path="/forgot-password" component={ForgotPasswordPage} /> */}
         <Route component={Error404} />

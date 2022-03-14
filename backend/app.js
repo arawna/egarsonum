@@ -12,6 +12,7 @@ const categoriesController = require("./controller/categories.controller");
 const productsController = require("./controller/products.controller");
 const orderController = require("./controller/order.controller");
 const callWaiterController = require("./controller/callWaiter.controller");
+const callBillController = require("./controller/callBill.controller");
 const app = express();
 app.use(cors());
 const server = http.createServer(app);
@@ -35,6 +36,7 @@ app.use("/", categoriesController);
 app.use("/", productsController);
 app.use("/", orderController);
 app.use("/", callWaiterController);
+app.use("/", callBillController);
 
 // app.get("/api/sockdene", (req, res) => {
 //   io.to("3").emit("siparis", 0);
@@ -53,6 +55,9 @@ io.on("connection", (socket) => {
   socket.on("garson", (values) => {
     console.log(values);
     io.to(values.cafeId).emit("garson", values.tableId);
+  });
+  socket.on("hesap", (values) => {
+    io.to(values.cafeId).emit("hesap", values.cafeId);
   });
 });
 

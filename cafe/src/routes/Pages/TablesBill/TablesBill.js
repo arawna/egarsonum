@@ -12,7 +12,7 @@ import TableBillModal from './TableBillModal';
 
 export default function TablesBill() {
   const breadcrumbs = [
-    { label: 'Ana Menü', link: '/' },
+    { label: 'Durum Takip', link: '/' },
     { label: 'Masa Hesapları', isActive: true },
   ];
 

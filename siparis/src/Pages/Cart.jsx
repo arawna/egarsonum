@@ -8,7 +8,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Grid } from "@mui/material";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { cartClear } from "../Store/actions/cartActions";
+import { cartClear, cartDell } from "../Store/actions/cartActions";
 import swal from "sweetalert";
 import AddAlertIcon from "@mui/icons-material/AddAlert";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
@@ -17,6 +17,7 @@ import socketIOClient from "socket.io-client";
 import baseUrl from "../Services/baseUrl";
 import CallWaiterService from "../Services/CallWaiterService";
 import CartVerifyedProducts from "./CartVerifyedProducts";
+import CallBillService from "../Services/CallBillService";
 
 const socket = socketIOClient(baseUrl);
 
@@ -78,19 +79,60 @@ export default function Cart() {
   };
 
   const handleCallWaiterBtnClick = () => {
-    const callWaiterService = new CallWaiterService();
-    callWaiterService
-      .addCallWaiter(authItem[0].tableId, authItem[0].cafeId)
-      .then((result) => {
-        socket.emit("garson", {
-          cafeId: authItem[0].cafeId.toString(),
-          tableId: authItem[0].tableId.toString(),
+    swal({
+      title: "Emin misiniz?",
+      text: "Garson çağırmak istiyormusunuz!",
+      icon: "info",
+      buttons: ["Iptal", "Çağır"],
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        const callWaiterService = new CallWaiterService();
+        callWaiterService
+          .addCallWaiter(authItem[0].tableId, authItem[0].cafeId)
+          .then((result) => {
+            socket.emit("garson", {
+              cafeId: authItem[0].cafeId.toString(),
+              tableId: authItem[0].tableId.toString(),
+            });
+          });
+        swal("Garson Çağırıldı!", {
+          icon: "success",
+          buttons: "Tamam",
         });
-      });
-    swal("Garson Çağırıldı!", {
-      icon: "success",
-      buttons: "Tamam",
+      } else {
+      }
     });
+  };
+  const handleCallBillBtnClick = () => {
+    swal({
+      title: "Emin misiniz?",
+      text: "Hesap istemek istiyormusunuz!",
+      icon: "info",
+      buttons: ["Iptal", "Hesap İste"],
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        const callBillService = new CallBillService();
+        callBillService
+          .addCallBill(authItem[0].tableId, authItem[0].cafeId)
+          .then((result) => {
+            socket.emit("hesap", {
+              cafeId: authItem[0].cafeId.toString(),
+              tableId: authItem[0].tableId.toString(),
+            });
+          });
+        swal("Hesap istendi!", {
+          icon: "success",
+          buttons: "Tamam",
+        });
+      } else {
+      }
+    });
+  };
+
+  const handleOneItemDel = (reduxId) => {
+    dispatch(cartDell(reduxId));
   };
 
   return (
@@ -177,11 +219,28 @@ export default function Cart() {
                 >
                   <p style={{ margin: "0px" }}>x{product.productPrice} ₺</p>
                 </Grid>
-                <Grid item xs={4} style={{ textAlign: "right" }}>
+                <Grid
+                  item
+                  xs={3}
+                  style={{
+                    textAlign: "center",
+                    borderRight: "1px solid #000",
+                  }}
+                >
                   <p style={{ margin: "0px" }}>Toplam</p>
                   <p style={{ margin: "0px" }}>
                     {product.amount * parseFloat(product.productPrice)} ₺
                   </p>
+                </Grid>
+                <Grid item xs={1} style={{ textAlign: "right" }}>
+                  <DeleteIcon
+                    style={{
+                      color: "red",
+                      cursor: "pointer",
+                      verticalAlign: "-7px",
+                    }}
+                    onClick={() => handleOneItemDel(product.reduxId)}
+                  />
                 </Grid>
               </Grid>
             ))}
@@ -317,6 +376,7 @@ export default function Cart() {
             borderRadius: "7px",
             cursor: "pointer",
           }}
+          onClick={() => handleCallBillBtnClick()}
         >
           <Grid container>
             <Grid item xs={10}>

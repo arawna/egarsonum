@@ -6,12 +6,17 @@ import baseUrl from 'services/api/basurl';
 import OrdersService from 'services/api/OrdersService';
 import socketIOClient from 'socket.io-client';
 import swal from 'sweetalert';
+import TableRestaurant from '@mui/icons-material/TableRestaurant';
+import FastfoodIcon from '@mui/icons-material/Fastfood';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 
 const socket = socketIOClient(baseUrl);
 
 export default function Orders() {
   const breadcrumbs = [
-    { label: 'Ana Menü', link: '/' },
+    { label: 'Durum Takip', link: '/' },
     { label: 'Siparişler', isActive: true },
   ];
   const { authItem } = useSelector(({ authNew }) => authNew);
@@ -67,18 +72,18 @@ export default function Orders() {
   return (
     <PageContainer heading="Siparişler" breadcrumbs={breadcrumbs}>
       <h3>Görüntülenmemiş Siparişler</h3>
-      <hr />
+      <hr style={{ marginBottom: '20px' }} />
       <TableContainer component={Paper}>
         <Table sx={{ width: '100%' }}>
-          <TableHead>
+          <TableHead style={{ background: 'linear-gradient(189deg, rgba(63,81,181,1) 18%, rgba(70,86,175,1) 100%)' }}>
             <TableRow>
-              <TableCell>Görüldü Olarak İşaretle</TableCell>
-              <TableCell>Masa Numarası</TableCell>
-              <TableCell>Ürün Adı</TableCell>
-              <TableCell>Ürün Fiyatı</TableCell>
-              <TableCell>Adet</TableCell>
-              <TableCell>Sipariş Notu</TableCell>
-              <TableCell>Sipariş Zamanı</TableCell>
+              <TableCell style={{ color: 'white', fontWeight: '600' }}>Görüldü Olarak İşaretle</TableCell>
+              <TableCell style={{ color: 'white', fontWeight: '600' }}>Masa Numarası</TableCell>
+              <TableCell style={{ color: 'white', fontWeight: '600' }}>Ürün Adı</TableCell>
+              <TableCell style={{ color: 'white', fontWeight: '600' }}>Ürün Fiyatı</TableCell>
+              <TableCell style={{ color: 'white', fontWeight: '600' }}>Adet</TableCell>
+              <TableCell style={{ color: 'white', fontWeight: '600' }}>Sipariş Notu</TableCell>
+              <TableCell style={{ color: 'white', fontWeight: '600' }}>Sipariş Zamanı</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -89,12 +94,23 @@ export default function Orders() {
                     Görüldü
                   </Button>
                 </TableCell>
-                <TableCell>{order.table_no}</TableCell>
-                <TableCell>{order.product_name}</TableCell>
-                <TableCell>{order.product_price}</TableCell>
-                <TableCell>{order.amount}</TableCell>
-                <TableCell>{order.note}</TableCell>
                 <TableCell>
+                  <TableRestaurant style={{ verticalAlign: '-7px', color: '#FF7F3F' }} /> {order.table_no}
+                </TableCell>
+                <TableCell>
+                  <FastfoodIcon style={{ verticalAlign: '-7px', color: '#D82148' }} /> {order.product_name}
+                </TableCell>
+                <TableCell>
+                  <b style={{ color: '#019267', fontSize: '20px' }}>₺</b> {order.product_price}
+                </TableCell>
+                <TableCell>
+                  <CollectionsBookmarkIcon style={{ verticalAlign: '-7px', color: '#6EBF8B' }} /> {order.amount}
+                </TableCell>
+                <TableCell>
+                  <AssignmentIcon style={{ verticalAlign: '-7px', color: '#F0A500' }} /> {order.note}
+                </TableCell>
+                <TableCell>
+                  <AccessTimeFilledIcon style={{ verticalAlign: '-7px', color: '#65C18C' }} />{' '}
                   {new Date(new Date(order.order_date).setHours(new Date(order.order_date).getHours() + 3)).toLocaleString()}
                 </TableCell>
               </TableRow>
@@ -104,28 +120,39 @@ export default function Orders() {
       </TableContainer>
 
       <h3 style={{ marginTop: '20px' }}>Görüntülenmiş Siparişler</h3>
-      <hr />
+      <hr style={{ marginBottom: '20px' }} />
       <TableContainer component={Paper}>
         <Table sx={{ width: '100%' }}>
-          <TableHead>
+          <TableHead style={{ background: 'linear-gradient(189deg, rgba(63,81,181,1) 18%, rgba(70,86,175,1) 100%)' }}>
             <TableRow>
-              <TableCell>Masa Numarası</TableCell>
-              <TableCell>Ürün Adı</TableCell>
-              <TableCell>Ürün Fiyatı</TableCell>
-              <TableCell>Adet</TableCell>
-              <TableCell>Sipariş Notu</TableCell>
-              <TableCell>Sipariş Zamanı</TableCell>
+              <TableCell style={{ color: 'white', fontWeight: '600' }}>Masa Numarası</TableCell>
+              <TableCell style={{ color: 'white', fontWeight: '600' }}>Ürün Adı</TableCell>
+              <TableCell style={{ color: 'white', fontWeight: '600' }}>Ürün Fiyatı</TableCell>
+              <TableCell style={{ color: 'white', fontWeight: '600' }}>Adet</TableCell>
+              <TableCell style={{ color: 'white', fontWeight: '600' }}>Sipariş Notu</TableCell>
+              <TableCell style={{ color: 'white', fontWeight: '600' }}>Sipariş Zamanı</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {seenOrders.map(order => (
               <TableRow key={order.id}>
-                <TableCell>{order.table_no}</TableCell>
-                <TableCell>{order.product_name}</TableCell>
-                <TableCell>{order.product_price}</TableCell>
-                <TableCell>{order.amount}</TableCell>
-                <TableCell>{order.note}</TableCell>
                 <TableCell>
+                  <TableRestaurant style={{ verticalAlign: '-7px', color: '#FF7F3F' }} /> {order.table_no}
+                </TableCell>
+                <TableCell>
+                  <FastfoodIcon style={{ verticalAlign: '-7px', color: '#D82148' }} /> {order.product_name}
+                </TableCell>
+                <TableCell>
+                  <b style={{ color: '#019267', fontSize: '20px' }}>₺</b> {order.product_price}
+                </TableCell>
+                <TableCell>
+                  <CollectionsBookmarkIcon style={{ verticalAlign: '-7px', color: '#6EBF8B' }} /> {order.amount}
+                </TableCell>
+                <TableCell>
+                  <AssignmentIcon style={{ verticalAlign: '-7px', color: '#F0A500' }} /> {order.note}
+                </TableCell>
+                <TableCell>
+                  <AccessTimeFilledIcon style={{ verticalAlign: '-7px', color: '#65C18C' }} />{' '}
                   {new Date(new Date(order.order_date).setHours(new Date(order.order_date).getHours() + 3)).toLocaleString()}
                 </TableCell>
               </TableRow>

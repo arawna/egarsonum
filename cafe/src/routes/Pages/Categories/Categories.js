@@ -22,7 +22,7 @@ import '../css/addModalStyle.css';
 
 export default function Categories() {
   const breadcrumbs = [
-    { label: 'Ana Menü', link: '/' },
+    { label: 'Düzenleme', link: '/' },
     { label: 'Kategoriler', isActive: true },
   ];
 

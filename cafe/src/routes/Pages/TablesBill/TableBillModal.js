@@ -1,4 +1,4 @@
-import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import OrdersService from 'services/api/OrdersService';
 import swal from 'sweetalert';
@@ -37,15 +37,15 @@ export default function TableBillModal({ table, handleClose }) {
 
   return (
     <div>
-      <TableContainer style={{ width: '100%' }}>
+      <TableContainer style={{ width: '100%' }} component={Paper}>
         <Table>
-          <TableHead>
+          <TableHead style={{ background: 'linear-gradient(189deg, rgba(63,81,181,1) 18%, rgba(70,86,175,1) 100%)' }}>
             <TableRow>
-              <TableCell>Ürün Adı</TableCell>
-              <TableCell>Ürün Fiyatı</TableCell>
-              <TableCell>Adet</TableCell>
-              <TableCell>Toplam</TableCell>
-              <TableCell>Not</TableCell>
+              <TableCell style={{ color: 'white', fontWeight: '600' }}>Ürün Adı</TableCell>
+              <TableCell style={{ color: 'white', fontWeight: '600' }}>Ürün Fiyatı</TableCell>
+              <TableCell style={{ color: 'white', fontWeight: '600' }}>Adet</TableCell>
+              <TableCell style={{ color: 'white', fontWeight: '600' }}>Toplam</TableCell>
+              <TableCell style={{ color: 'white', fontWeight: '600' }}>Not</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -61,7 +61,9 @@ export default function TableBillModal({ table, handleClose }) {
           </TableBody>
         </Table>
       </TableContainer>
-      <p style={{ fontSize: '20px', fontWeight: '600', marginTop: '10px' }}>Genel Toplam: {totalPrice} ₺</p>
+      <p style={{ fontSize: '20px', fontWeight: '600', marginTop: '10px' }}>
+        Genel Toplam: <b style={{ fontWeight: '800', color: '#019267' }}>{totalPrice} ₺</b>
+      </p>
       <div style={{ textAlign: 'right' }}>
         <Button
           variant="contained"

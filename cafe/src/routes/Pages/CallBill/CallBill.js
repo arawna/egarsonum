@@ -3,7 +3,7 @@ import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, 
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import baseUrl from 'services/api/basurl';
-import CallWaiterService from 'services/api/CallWaiterService';
+import CallBillService from 'services/api/CallBillService';
 import socketIOClient from 'socket.io-client';
 import swal from 'sweetalert';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
@@ -11,18 +11,18 @@ import TableRestaurant from '@mui/icons-material/TableRestaurant';
 
 const socket = socketIOClient(baseUrl);
 
-export default function CallWaiter() {
+export default function CallBill() {
   const breadcrumbs = [
     { label: 'Durum Takip', link: '/' },
-    { label: 'Garson Çağırma İstekeri', isActive: true },
+    { label: 'Hesap İstekeri', isActive: true },
   ];
 
-  let [callWaiters, setCallWaiters] = useState([]);
+  let [callBills, setCallBills] = useState([]);
   let [reloadValues, setReloadValues] = useState('0');
   useEffect(() => {
-    let callWaiterService = new CallWaiterService();
-    callWaiterService.getCallWaitersByToken(localStorage.getItem('token')).then(result => {
-      setCallWaiters(result.data.data);
+    let callBillService = new CallBillService();
+    callBillService.getCallBillsByToken(localStorage.getItem('token')).then(result => {
+      setCallBills(result.data.data);
       console.log(result.data.data);
     });
   }, [reloadValues]);
@@ -44,19 +44,19 @@ export default function CallWaiter() {
     snd.play();
   }
 
-  socket.on('garson', deger => {
-    console.log('garson çağırıldı');
+  socket.on('hesap', deger => {
+    console.log('hesap istendi');
     beep();
     handleReloadValues();
-    swal('Bir masa garson çağırdı!', {
+    swal('Bir masa hesap istedi!', {
       icon: 'success',
       buttons: 'Tamam',
     });
   });
-  let callWaiterService = new CallWaiterService();
+  let callBillService = new CallBillService();
 
-  const handleSeeBtnClick = callWaiterId => {
-    callWaiterService.setActiveFalseByCallWaiterId(localStorage.getItem('token'), callWaiterId).then(result => {
+  const handleSeeBtnClick = callBillId => {
+    callBillService.setActiveFalseByCallBillId(localStorage.getItem('token'), callBillId).then(result => {
       handleReloadValues();
       swal('Görüldü olarak işaretlendi!', {
         icon: 'success',
@@ -66,7 +66,7 @@ export default function CallWaiter() {
   };
 
   return (
-    <PageContainer heading="Garson Çağırma İstekleri" breadcrumbs={breadcrumbs}>
+    <PageContainer heading="Hesap İstekleri" breadcrumbs={breadcrumbs}>
       <TableContainer style={{ width: '100%' }} component={Paper}>
         <Table>
           <TableHead style={{ background: 'linear-gradient(189deg, rgba(63,81,181,1) 18%, rgba(70,86,175,1) 100%)' }}>
@@ -77,19 +77,19 @@ export default function CallWaiter() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {callWaiters.map(callWaiter => (
-              <TableRow key={callWaiter.id}>
+            {callBills.map(callBill => (
+              <TableRow key={callBill.id}>
                 <TableCell>
-                  <Button variant="contained" onClick={() => handleSeeBtnClick(callWaiter.id)}>
+                  <Button variant="contained" onClick={() => handleSeeBtnClick(callBill.id)}>
                     Görüldü Olarak İşaretle
                   </Button>
                 </TableCell>
                 <TableCell>
-                  <TableRestaurant style={{ verticalAlign: '-7px', color: '#FF7F3F' }} /> {callWaiter.table_no}
+                  <TableRestaurant style={{ verticalAlign: '-7px', color: '#FF7F3F' }} /> {callBill.table_no}
                 </TableCell>
                 <TableCell>
                   <AccessTimeFilledIcon style={{ verticalAlign: '-7px', color: '#65C18C' }} />{' '}
-                  {new Date(new Date(callWaiter.date).setHours(new Date(callWaiter.date).getHours() + 3)).toLocaleString()}
+                  {new Date(new Date(callBill.date).setHours(new Date(callBill.date).getHours() + 3)).toLocaleString()}
                 </TableCell>
               </TableRow>
             ))}
