@@ -57,8 +57,8 @@ export default function ProductsList({ reloadValues, setReloadValues }) {
     <div style={{ marginTop: '10px' }}>
       <GridContainer>
         {products.map(product => (
-          <Grid item md={3} key={product.product_id}>
-            <Card>
+          <Grid item md={3} xs={12} key={product.product_id}>
+            <Card style={{ width: '100%' }}>
               <CardMedia component={'img'} alt={product.product_name} height="140" image={product.product_img_url} />
               <CardContent>
                 <Typography gutterBottom variant="h5" component={'div'}>

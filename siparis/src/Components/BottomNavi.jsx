@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 export default function BottomNavi() {
   const navigate = useNavigate();
   const { cartItem } = useSelector(({ cart }) => cart);
+  const { authItem } = useSelector(({ auth }) => auth);
 
   return (
     <div>
@@ -37,16 +38,18 @@ export default function BottomNavi() {
             label="Ana Sayfa"
             icon={<HomeIcon />}
           />
-          <BottomNavigationAction
-            sx={{ color: "white" }}
-            label="Sepet"
-            onClick={() => navigate("/sepet")}
-            icon={
-              <Badge badgeContent={cartItem.length} color="primary">
-                <ShoppingCartIcon />
-              </Badge>
-            }
-          />
+          {authItem[0].order === 1 && (
+            <BottomNavigationAction
+              sx={{ color: "white" }}
+              label="Sepet"
+              onClick={() => navigate("/sepet")}
+              icon={
+                <Badge badgeContent={cartItem.length} color="primary">
+                  <ShoppingCartIcon />
+                </Badge>
+              }
+            />
+          )}
         </BottomNavigation>
       </Paper>
     </div>

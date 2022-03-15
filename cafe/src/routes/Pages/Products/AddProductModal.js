@@ -111,7 +111,7 @@ export default function AddProductModal({ handleAddModalClose, setReloadValues, 
         />
         <div style={{ marginTop: '10px' }}></div>
         <GridContainer>
-          <Grid item md={6}>
+          <Grid item md={6} xs={12}>
             <FormControl fullWidth error={formik.errors.categoryId && formik.touched.categoryId}>
               <InputLabel id="categoryId-label">Kategori</InputLabel>
               <Select
@@ -130,7 +130,7 @@ export default function AddProductModal({ handleAddModalClose, setReloadValues, 
               <FormHelperText>{formik.errors.categoryId}</FormHelperText>
             </FormControl>
           </Grid>
-          <Grid item md={6}>
+          <Grid item md={6} xs={12}>
             <TextField
               id="productPrice"
               label="Ürün Fiyatı"

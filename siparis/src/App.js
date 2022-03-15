@@ -23,6 +23,7 @@ function App() {
               userLogin({
                 cafeId: result2.data.data.cafe_id,
                 tableId: result2.data.data.table_id,
+                order: result2.data.data.order,
               })
             );
             //süre sorun değilse

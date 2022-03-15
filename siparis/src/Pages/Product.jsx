@@ -1,5 +1,6 @@
 import { Box, Grid, Modal } from "@mui/material";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import CartAddModal from "./CartAddModal";
 
 const style = {
@@ -24,6 +25,8 @@ export default function Product({ product }) {
     setSelectedProduct(product);
     handleOpen();
   };
+
+  const { authItem } = useSelector(({ auth }) => auth);
 
   return (
     <>
@@ -95,7 +98,7 @@ export default function Product({ product }) {
           <Grid container>
             <Grid
               item
-              xs={6}
+              xs={authItem[0].order === 0 ? 12 : 6}
               style={{
                 borderRight: "3px solid #141E27",
                 height: "70px",
@@ -118,31 +121,33 @@ export default function Product({ product }) {
                 <p>Fiyat</p>
               </div>
             </Grid>
-            <Grid
-              item
-              xs={6}
-              style={{
-                height: "70px",
-                textAlign: "center",
-                position: "relative",
-                cursor: "pointer",
-              }}
-            >
-              <div
+            {authItem[0].order === 1 && (
+              <Grid
+                item
+                xs={6}
                 style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%,-50%)",
+                  height: "70px",
                   textAlign: "center",
-                  color: "black",
-                  fontWeight: "500",
+                  position: "relative",
+                  cursor: "pointer",
                 }}
-                onClick={() => handleAddCartBtn(product)}
               >
-                Sepete Ekle
-              </div>
-            </Grid>
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%,-50%)",
+                    textAlign: "center",
+                    color: "black",
+                    fontWeight: "500",
+                  }}
+                  onClick={() => handleAddCartBtn(product)}
+                >
+                  Sepete Ekle
+                </div>
+              </Grid>
+            )}
           </Grid>
         </div>
       </div>

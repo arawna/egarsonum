@@ -48,7 +48,14 @@ export default function CartAddModal({ selectedProduct, handleClose }) {
   };
 
   return (
-    <div style={{ backgroundColor: "#EEEDDE", borderRadius: "50px" }}>
+    <div
+      style={{
+        backgroundColor: "#EEEDDE",
+        borderRadius: "50px",
+        maxHeight: "80vh",
+        overflow: "auto",
+      }}
+    >
       <Grid
         container
         style={{
