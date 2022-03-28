@@ -2,9 +2,9 @@ const mysql2 = require("mysql2");
 const dbcon = () => {
   let con = mysql2.createConnection({
     host: "localhost",
-    user: "root",
-    password: "1220fb1220",
-    database: "egarsonum",
+    user: "qrgarson_ali",
+    password: "alialiFb777.",
+    database: "qrgarson_qrgarsonum",
   });
   return con;
 };

@@ -13,12 +13,13 @@ const productsController = require("./controller/products.controller");
 const orderController = require("./controller/order.controller");
 const callWaiterController = require("./controller/callWaiter.controller");
 const callBillController = require("./controller/callBill.controller");
+const odemeDenemeController = require("./controller/odemeDeneme.controller");
 const app = express();
 app.use(cors());
 const server = http.createServer(app);
 const io = require("socket.io")(server, {
   cors: {
-    origin: ["http://localhost:3000", "http://localhost:3001"],
+    origin: ["https://cafe.qrgarsonum.com", "https://siparis.qrgarsonum.com"],
     methods: ["GET", "POST"],
   },
 });
@@ -37,6 +38,7 @@ app.use("/", productsController);
 app.use("/", orderController);
 app.use("/", callWaiterController);
 app.use("/", callBillController);
+app.use("/", odemeDenemeController);
 
 // app.get("/api/sockdene", (req, res) => {
 //   io.to("3").emit("siparis", 0);

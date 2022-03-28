@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Col,
   Form,
@@ -154,7 +154,7 @@ export default function WelcomeRegister() {
           <a
             href="mailto:iletisim@qrgarsonum.com"
             className="btn btn-danger mt-2"
-            style={{ width:"100%" }}
+            style={{ width: "100%" }}
           >
             <i className="bi bi-envelope"></i> Mail iletisim@qrgarsonum.com
           </a>

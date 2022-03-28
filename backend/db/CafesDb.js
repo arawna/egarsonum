@@ -29,7 +29,8 @@ const addCafe = async (
   cafeName,
   tableAmount,
   createDate,
-  lastDate
+  lastDate,
+  order
 ) => {
   userDb.addUser(email, pass).then(async () => {
     userDb.getByEmailUser(email).then(async (res) => {
@@ -40,6 +41,7 @@ const addCafe = async (
           table_amount: tableAmount,
           create_date: createDate,
           last_date: lastDate,
+          order: order,
         })
         .into("cafes");
     });

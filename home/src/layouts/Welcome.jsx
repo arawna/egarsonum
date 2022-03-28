@@ -22,17 +22,39 @@ import {
 import WelcomeImages from "../pages/WellcomePages/WelcomeImages";
 import WelcomeRegister from "../pages/WellcomePages/WelcomeRegister";
 import "./Welcome.css";
+import Typical from "react-typical";
+import { QrCode } from "@mui/icons-material";
 
 export default function Welcome() {
   const [isOpen, setIsOpen] = useState(false);
   const toogle = () => setIsOpen(!isOpen);
 
   const [modal, setModal] = useState(false);
-  const toogleModal = () => setModal(!modal);
+  const [selectedProduct, setSelectedProduct] = useState("");
+  const toogleModal = () => {
+    setModal(!modal);
+  };
+  const handleClickProduct = (productId) => {
+    setSelectedProduct(productId);
+    toogleModal();
+  };
   const closeBtn = (
     <button
       className="close btn"
       onClick={toogleModal}
+      style={{ fontSize: "1.3em" }}
+    >
+      <b>&times;</b>
+    </button>
+  );
+  const [demoModal, setDemoModal] = useState(false);
+  const toogleDemoModal = () => {
+    setDemoModal(!demoModal);
+  };
+  const closeBtnDemo = (
+    <button
+      className="close btn"
+      onClick={toogleDemoModal}
       style={{ fontSize: "1.3em" }}
     >
       <b>&times;</b>
@@ -75,27 +97,63 @@ export default function Welcome() {
       <WelcomeImages />
       <Container className="mt-5">
         <Row>
+          <Col lg="4" style={{ textAlign: "center" }}>
+            <QrCode
+              style={{ fontSize: "300px", verticalAlign: "-400px" }}
+              className="qr-logo"
+            />
+            {/* <img
+              src="https://i.hizliresim.com/5zprbp7.png"
+              alt="Qr"
+              style={{ height: "auto", width: "100%" }}
+            ></img> */}
+          </Col>
           <Col lg="8" style={{ marginTop: "10%" }} id="qrmenu">
-            <h2 style={{ fontSize: "5em" }}>QR Menü</h2>
+            <h2 style={{ fontSize: "5em" }}>QR Garsonum</h2>
+            <div style={{ fontSize: "30px", color: "#D82148" }}>
+              <Typical
+                steps={[
+                  "QR Kodlu Menü Sistemi",
+                  1000,
+                  "İlk 1 Ücretsiz",
+                  1000,
+                  "Hızlı",
+                  1000,
+                  "Kolay Kullanım",
+                  1000,
+                  "Pratik",
+                  1000,
+                  "Yönlendirici Tasarım",
+                  1000,
+                  "Uygulama Modu",
+                  1000,
+                  "İnteraktif",
+                  1000,
+                  "Teşfik Edici Tasarım",
+                  1000,
+                  "Ve Daha Fazlası...",
+                  1000,
+                ]}
+                loop={Infinity}
+                wrapper="b"
+              />
+            </div>
+
             <p style={{ fontSize: "1.5em" }}>
               Qrgarsonum müşterilerinizin menüye dijital ortamda QR kod
               vasıtasıyla ulaşmasını ve siparişlerini size iletebilmesini
               sağlayan bir web platformudur
             </p>
           </Col>
-          <Col lg="4">
-            <img
-              src="https://i.hizliresim.com/5zprbp7.png"
-              alt="Qr"
-              style={{ height: "auto", width: "100%" }}
-            ></img>
-          </Col>
         </Row>
       </Container>
       <Container>
         <Row>
           <Col lg="3">
-            <div className="card description-card">
+            <div
+              className="card description-card"
+              style={{ borderRadius: "20px" }}
+            >
               <div className="card-body">
                 <h5 className="card-title">
                   <i className="bi bi-calendar-date"></i> İlk Ay Ücretsiz
@@ -108,7 +166,10 @@ export default function Welcome() {
             </div>
           </Col>
           <Col lg="3">
-            <div className="card description-card">
+            <div
+              className="card description-card"
+              style={{ borderRadius: "20px" }}
+            >
               <div className="card-body">
                 <h5 className="card-title">₺ Düşük Maliyet</h5>
                 <p className="card-text">
@@ -121,7 +182,10 @@ export default function Welcome() {
         </Row>
         <Row className="mt-3">
           <Col lg="4">
-            <div className="card description-card">
+            <div
+              className="card description-card"
+              style={{ borderRadius: "20px" }}
+            >
               <div className="card-body">
                 <h5 className="card-title">
                   <i className="bi bi-phone"></i>
@@ -135,7 +199,10 @@ export default function Welcome() {
             </div>
           </Col>
           <Col lg="8">
-            <div className="card description-card">
+            <div
+              className="card description-card"
+              style={{ borderRadius: "20px" }}
+            >
               <div className="card-body">
                 <h5 className="card-title">
                   <i className="bi bi-hand-thumbs-up"></i> Kullanıcı Deneyimi
@@ -150,7 +217,10 @@ export default function Welcome() {
         </Row>
         <Row className="mt-3">
           <Col lg="8">
-            <div className="card description-card">
+            <div
+              className="card description-card"
+              style={{ borderRadius: "20px" }}
+            >
               <div className="card-body">
                 <h5 className="card-title">
                   <i className="bi bi-clock"></i> Sipariş
@@ -163,7 +233,10 @@ export default function Welcome() {
             </div>
           </Col>
           <Col lg="4">
-            <div className="card description-card">
+            <div
+              className="card description-card"
+              style={{ borderRadius: "20px" }}
+            >
               <div className="card-body">
                 <h5 className="card-title">
                   <i className="bi bi-x-diamond-fill"></i> QR Kod
@@ -197,7 +270,7 @@ export default function Welcome() {
 
         <Row>
           <Col lg="4">
-            <div className="card why-card">
+            <div className="card why-card" style={{ borderRadius: "20px" }}>
               <div className="why-card-icon-div">
                 <i className="bi bi-globe" style={{ fontSize: "3em" }}></i>
               </div>
@@ -213,7 +286,7 @@ export default function Welcome() {
             </div>
           </Col>
           <Col lg="4">
-            <div className="card why-card">
+            <div className="card why-card" style={{ borderRadius: "20px" }}>
               <div className="why-card-icon-div">
                 <i
                   class="bi bi-arrow-90deg-right"
@@ -231,7 +304,7 @@ export default function Welcome() {
             </div>
           </Col>
           <Col lg="4">
-            <div className="card why-card">
+            <div className="card why-card" style={{ borderRadius: "20px" }}>
               <div className="why-card-icon-div">
                 <i className="bi bi-brush-fill" style={{ fontSize: "3em" }}></i>
               </div>
@@ -248,7 +321,7 @@ export default function Welcome() {
         </Row>
         <Row className="mt-3">
           <Col lg="4">
-            <div className="card why-card">
+            <div className="card why-card" style={{ borderRadius: "20px" }}>
               <div className="why-card-icon-div">
                 <i
                   className="bi bi-shield-fill-check"
@@ -267,7 +340,7 @@ export default function Welcome() {
             </div>
           </Col>
           <Col lg="4">
-            <div className="card why-card">
+            <div className="card why-card" style={{ borderRadius: "20px" }}>
               <div className="why-card-icon-div">
                 <i className="bi bi-clock-fill" style={{ fontSize: "3em" }}></i>
               </div>
@@ -283,7 +356,7 @@ export default function Welcome() {
             </div>
           </Col>
           <Col lg="4">
-            <div className="card why-card">
+            <div className="card why-card" style={{ borderRadius: "20px" }}>
               <div className="why-card-icon-div">
                 <i className="bi bi-graph-up" style={{ fontSize: "3em" }}></i>
               </div>
@@ -328,7 +401,7 @@ export default function Welcome() {
                   <b>Sipariş Paketi</b>
                 </h5>
                 <p className="card-text" style={{ fontSize: "2em" }}>
-                  <b>*₺ / Ay</b>
+                  <b>1000 ₺ / Yıl</b>
                 </p>
               </div>
               <ul className="list-group list-group-flush">
@@ -352,19 +425,42 @@ export default function Welcome() {
               <div className="card-body">
                 <button
                   className="btn btn-outline-danger btn-lg"
-                  onClick={toogleModal}
+                  onClick={() => handleClickProduct("11212623")}
                 >
-                  Teklif Al
+                  Satın Al
                 </button>
                 <Modal isOpen={modal} toggle={toogleModal}>
                   <ModalHeader toggle={toogleModal} close={closeBtn}>
-                    Teklif Al
+                    Satın Al
                   </ModalHeader>
                   <ModalBody>
-                    <WelcomeRegister />
+                    <iframe
+                      name="iFrame1"
+                      title="asdasd"
+                      src={"https://shopier.com/" + selectedProduct}
+                      frameborder="1"
+                      scrolling="yes"
+                      width="100%"
+                      height="500px"
+                    ></iframe>
+                    {/* <WelcomeRegister /> */}
                   </ModalBody>
                   <ModalFooter>
                     <Button color="secondary" onClick={toogleModal}>
+                      Kapat
+                    </Button>
+                  </ModalFooter>
+                </Modal>
+                <Modal isOpen={demoModal} toggle={toogleDemoModal}>
+                  <ModalHeader toggle={toogleDemoModal} close={closeBtnDemo}>
+                    Satın Al
+                  </ModalHeader>
+                  <ModalBody>
+                    <WelcomeRegister />
+                    {/* <WelcomeRegister /> */}
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button color="secondary" onClick={toogleDemoModal}>
                       Kapat
                     </Button>
                   </ModalFooter>
@@ -388,7 +484,7 @@ export default function Welcome() {
                   <b>Menü Paketi</b>
                 </h5>
                 <p className="card-text" style={{ fontSize: "2em" }}>
-                  <b>*₺ / Ay</b>
+                  <b>500 ₺ / Yıl</b>
                 </p>
               </div>
               <ul className="list-group list-group-flush">
@@ -412,9 +508,9 @@ export default function Welcome() {
               <div className="card-body">
                 <button
                   className="btn btn-outline-danger btn-lg"
-                  onClick={toogleModal}
+                  onClick={() => handleClickProduct("11211678")}
                 >
-                  Teklif Al
+                  Satın Al
                 </button>
               </div>
             </div>
@@ -444,7 +540,7 @@ export default function Welcome() {
             <span style={{ color: "red" }}>iletisim@qrgarsonum.com</span>{" "}
             mailinden ulaşarak iletebilirsiniz.
           </p>
-          <button className="btn btn-danger btn-lg" onClick={toogleModal}>
+          <button className="btn btn-danger btn-lg" onClick={toogleDemoModal}>
             Demo Talebi
           </button>
         </Container>
