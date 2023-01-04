@@ -19,7 +19,7 @@ app.use(cors());
 const server = http.createServer(app);
 const io = require("socket.io")(server, {
   cors: {
-    origin: ["https://cafe.qrgarsonum.com", "https://siparis.qrgarsonum.com"],
+    origin: ["https://cafe.arawnsoft.com", "https://siparis.arawnsoft.com","http://localhost:3000","http://localhost:3001","http://localhost:3002"],
     methods: ["GET", "POST"],
   },
 });

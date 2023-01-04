@@ -8,12 +8,12 @@
 //   },
 // };
 const kenxConnection = {
-  client: "mysql2",
+  client: "mysql",
   connection: {
     host: "localhost",
-    user: "root",
-    password: "1220fb1220",
-    database: "egarsonum",
+    user: "arawnsoft_qr",
+    password: "alialiFb777.",
+    database: "arawnsoft_qrgarsonum",
   },
 };
 module.exports = kenxConnection;

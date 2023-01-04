@@ -1,7 +1,7 @@
 {
   "name": "cafe",
   "version": "0.1.0",
-  "homepage": "https://qrgarsonum.com",
+  "homepage": "https://qrgarsonum.arawnsoft.com",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.8.2",

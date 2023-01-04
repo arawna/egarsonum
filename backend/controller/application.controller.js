@@ -19,7 +19,7 @@ applicationController.get("/api/application/getAll", (req, res) => {
   con = dbcon();
   con.connect(function (err) {
     if (err) throw err;
-    con.query("SELECT * FROM egarsonum.application;", function (err, result) {
+    con.query("SELECT * FROM arawnsoft_qrgarsonum.application;", function (err, result) {
       if (err) throw err;
       res.status(200).json({
         status: true,
@@ -63,18 +63,18 @@ applicationController.post("/api/application/add", (req, res) => {
       subject: "Qrgarsonum Başvuru",
       text: `Sirket adı: ${req.body.companyName} -- Ad: ${req.body.name} -- Telefon: ${req.body.phone} -- Email: ${req.body.email} -- Not: ${req.body.note}`,
     };
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("Email sent: " + info.response);
-      }
-    });
+    // transporter.sendMail(mailOptions, function (error, info) {
+    //   if (error) {
+    //     console.log(error);
+    //   } else {
+    //     console.log("Email sent: " + info.response);
+    //   }
+    // });
     con = dbcon();
     con.connect(function (err) {
       if (err) throw err;
       con.query(
-        "INSERT INTO `qrgarson_qrgarsonum`.`application`(`company_name`,`name`,`phone`,`email`,`note`) VALUES(" +
+        "INSERT INTO `arawnsoft_qrgarsonum`.`application`(`company_name`,`name`,`phone`,`email`,`note`) VALUES(" +
           '"' +
           req.body.companyName +
           '"' +

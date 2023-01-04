@@ -87,7 +87,7 @@ export default function Welcome() {
               </NavItem>
             </Nav>
             <NavbarText style={{ marginLeft: "auto" }}>
-              <a href="https://cafe.qrgarsonum.com" className="btn btn-danger">
+              <a href="https://cafe.arawnsoft.com" className="btn btn-danger">
                 Giriş Yap
               </a>
             </NavbarText>

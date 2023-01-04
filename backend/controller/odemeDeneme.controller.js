@@ -6,11 +6,11 @@ const cafesDb = require("../db/CafesDb");
 const randomText = require("../core/randomText");
 const nodemailer = require("nodemailer");
 let transporter = nodemailer.createTransport({
-  host: "mail.qrgarsonum.com",
+  host: "qrgarsonum.arawnsoft.com",
   port: 465,
   secure: true, // true for 465, false for other ports
   auth: {
-    user: "iletisim@qrgarsonum.com", // generated ethereal user
+    user: "iletisim@qrgarsonum.arawnsoft.com", // generated ethereal user
     pass: "alialiFb777.", // generated ethereal password
   },
 });
@@ -61,7 +61,7 @@ odemeDenemeController.post("/api/odemedeneme", async (req, res) => {
           to: jsonText.email,
           subject: "QR Garsonum Kullanıcı Bilgileri",
           text: `Email: ${jsonText.email} - Şifre: ${pass}`,
-          html: `<div><p><b>Eposta:</b> ${jsonText.email}</p><p><b>Şifre:</b> ${pass}</p><p>Şifrenizi panelinizden değiştirebilirsiniz</p><p>https://cafe.qrgarsonum.com</p></div>`,
+          html: `<div><p><b>Eposta:</b> ${jsonText.email}</p><p><b>Şifre:</b> ${pass}</p><p>Şifrenizi panelinizden değiştirebilirsiniz</p><p>https://cafe.arawnsoft.com</p></div>`,
         })
         .then((result2) => {
           res.send("success");
@@ -71,7 +71,7 @@ odemeDenemeController.post("/api/odemedeneme", async (req, res) => {
 
 odemeDenemeController.post("/api/maildeneme", async (req, res) => {
   await transporter.sendMail({
-    from: "iletisim@qrgarsonum.com",
+    from: "iletisim@qrgarsonum.arawnsoft.com",
     to: "alihocaoglu1220@gmail.com",
     subject: "QR Garsonum Kullanıcı Bilgileri",
     text: "Hello word",

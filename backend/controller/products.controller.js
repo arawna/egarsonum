@@ -58,7 +58,7 @@ productsController.post("/api/products/addProduct", async (req, res) => {
               req.body.productName,
               req.body.productPrice,
               req.body.prodcuctDescription,
-              "https://qrgarsonum.com/api/img/" + result
+              "https://qrgarsonum.arawnsoft.com/api/img/" + result
             )
             .then(() => {
               res.status(200).json({
@@ -112,7 +112,7 @@ productsController.post("/api/products/updateProduct", async (req, res) => {
                       req.body.productName,
                       req.body.productPrice,
                       req.body.prodcuctDescription,
-                      "https://qrgarsonum.com/api/img/" + result2
+                      "https://qrgarsonum.arawnsoft.com/api/img/" + result2
                     )
                     .then(() => {
                       res.status(200).json({

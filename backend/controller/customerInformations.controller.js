@@ -15,7 +15,7 @@ customerInformationsController.get("/api/cafe/:cafetext", async (req, res) => {
   ).toString(CryptoJS.enc.Utf8);
   if (!cafeAndTable) {
     //sifreli metin geçersizse yönlendirme
-    res.redirect("https://qrgarsonum.com");
+    res.redirect("https://qrgarsonum.arawnsoft.com");
   } else {
     //sifreli medin geçerli ise
     //db kayıt ve yönlendirme yapılacak
@@ -29,7 +29,7 @@ customerInformationsController.get("/api/cafe/:cafetext", async (req, res) => {
         create_date: new Date().toISOString().slice(0, 19).replace("T", " "),
       })
       .into("customer_informations");
-    res.redirect("https://siparis.qrgarsonum.com");
+    res.redirect("https://siparis.arawnsoft.com");
   }
 });
 

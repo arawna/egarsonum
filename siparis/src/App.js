@@ -29,11 +29,11 @@ function App() {
             //süre sorun değilse
           } else {
             //süre geçmişse
-            window.location.href = "https://qrgarsonum.com";
+            window.location.href = "https://qrgarsonum.arawnsoft.com";
           }
         })
         .catch((result3) => {
-          window.location.href = "https://qrgarsonum.com";
+          window.location.href = "https://qrgarsonum.arawnsoft.com";
         });
     });
   }, [dispatch]);

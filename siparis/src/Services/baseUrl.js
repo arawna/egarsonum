@@ -1,2 +1,2 @@
-const baseUrl = "https://qrgarsonum.com";
+const baseUrl = "https://qrgarsonum.arawnsoft.com";
 export default baseUrl;

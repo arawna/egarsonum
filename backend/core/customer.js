@@ -27,16 +27,22 @@ const getCustomerInfoByIp = async (ip) => {
   //     "products.product_img_url"
   //   );
 
-  let firstDate = new Date(data.create_date).getTime() + 2 * 60 * 60 * 1000;
-  let curentDate = new Date(
-    new Date().toISOString().slice(0, 19).replace("T", " ")
-  ).getTime();
-  data.stil_valid = firstDate > curentDate;
-  return {
-    cafe_id: data.cafe_id,
-    table_id: data.table_id,
-    stil_valid: data.stil_valid,
-    order: data.order,
-  };
+  if(data){
+    let firstDate = new Date(data.create_date).getTime() + 2 * 60 * 60 * 1000;
+    let curentDate = new Date(
+      new Date().toISOString().slice(0, 19).replace("T", " ")
+    ).getTime();
+    data.stil_valid = firstDate > curentDate;
+    return {
+      cafe_id: data.cafe_id,
+      table_id: data.table_id,
+      stil_valid: data.stil_valid,
+      order: data.order,
+    };
+  }else {
+    return null;
+  }
+
+  
 };
 module.exports = getCustomerInfoByIp;

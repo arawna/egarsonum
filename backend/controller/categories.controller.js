@@ -15,7 +15,7 @@ categoriesController.post("/api/categories/add", async (req, res) => {
             .addCategory(
               tokenService.getDetailToken(req.body.token).cafeId,
               req.body.name,
-              "https://qrgarsonum.com/api/img/" + result
+              "https://qrgarsonum.arawnsoft.com/api/img/" + result
             )
             .then((result2) => {
               res.status(200).json({
@@ -114,7 +114,7 @@ categoriesController.post("/api/categories/update", async (req, res) => {
                       .updateCategory(
                         req.body.categoryId,
                         req.body.name,
-                        "https://qrgarsonum.com/api/img/" + result2
+                        "https://qrgarsonum.arawnsoft.com/api/img/" + result2
                       )
                       .then(() => {
                         res.status(200).json({
